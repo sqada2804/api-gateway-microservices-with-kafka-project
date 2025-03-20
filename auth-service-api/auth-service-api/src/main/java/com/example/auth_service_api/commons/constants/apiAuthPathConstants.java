@@ -1,4 +1,4 @@
-package com.example.auth_service_api.Commons.constants;
+package com.example.auth_service_api.commons.constants;
 
 public class apiAuthPathConstants {
     public static final String V1_ROUTE = "/v1";
