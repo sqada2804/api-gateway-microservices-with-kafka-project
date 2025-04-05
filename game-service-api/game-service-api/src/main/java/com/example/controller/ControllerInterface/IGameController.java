@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(apiPathConstants.V1_ROUTE + apiPathConstants.GAME_ROUTE)
 public interface IGameController {
     @PostMapping(value = "/create")
-    ResponseEntity<GameModel> createGame(@RequestBody GameDTO gameDTO, @RequestHeader String userId);
+    ResponseEntity<GameModel> createGame(@RequestBody GameDTO gameDTO, @RequestHeader("X-User-Id") String userId);
 
     @GetMapping(value = "/get")
-    ResponseEntity<GameModel> getGame(@RequestHeader String userId, @PathVariable Long gameId);
+    ResponseEntity<GameModel> getGame(@RequestHeader("X-User-Id") String userId, @PathVariable Long gameId);
 
     @PutMapping(value = "/update/{gameId}")
-    ResponseEntity<Void> updateGame(@RequestBody GameDTO gameDTO, @RequestHeader String userId, @PathVariable Long id);
+    ResponseEntity<Void> updateGame(@RequestBody GameDTO gameDTO, @RequestHeader("X-User-Id") String userId, @PathVariable Long id);
 
     @DeleteMapping(value = "/delete/{gameId}")
-    ResponseEntity<Void> deleteGame(@PathVariable Long id, @RequestHeader String userId);
+    ResponseEntity<Void> deleteGame(@PathVariable Long id, @RequestHeader("X-User-Id") String userId);
 }

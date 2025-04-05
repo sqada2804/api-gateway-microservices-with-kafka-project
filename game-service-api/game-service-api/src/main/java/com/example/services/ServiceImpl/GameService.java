@@ -44,19 +44,18 @@ public class GameService implements IGameService {
     public void deleteGame(String userId, Long id) {
         gameRepository.findGameByUserIdAndGameId(userId, id)
                 .ifPresentOrElse(gameRepository::delete, () -> {
-                    throw new RuntimeException("Error deletign Game");
+                    throw new RuntimeException("Error deleting Game");
                 });
     }
 
     private GameModel updateFieldsGame(GameModel existingGame, GameDTO gameDTO){
-        existingGame.setNameGame(gameDTO.getName());
+        existingGame.setName(gameDTO.getName());
         return existingGame;
     }
 
     private GameModel mapToEntity(GameDTO gameDTO, String userId){
-        return GameModel.builder().nameGame(gameDTO.getName())
+        return GameModel.builder().name(gameDTO.getName())
                 .userId(userId)
                 .build();
     }
-
 }

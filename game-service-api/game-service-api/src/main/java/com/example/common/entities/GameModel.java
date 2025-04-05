@@ -15,6 +15,6 @@ public class GameModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long gameId;
-    private String nameGame;
+    private String name;
     private String userId;
 }
