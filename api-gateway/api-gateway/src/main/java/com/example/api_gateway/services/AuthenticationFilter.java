@@ -16,10 +16,10 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     private final RouterValidator validator;
     private final JwtUtils jwtUtils;
 
-    public AuthenticationFilter(RouterValidator validator, JwtUtils jwtUtils, JwtUtils jwtUtils1) {
+    public AuthenticationFilter(RouterValidator validator, JwtUtils jwtUtils) {
         super(Config.class);
         this.validator = validator;
-        this.jwtUtils = jwtUtils1;
+        this.jwtUtils = jwtUtils;
     }
 
     @Override

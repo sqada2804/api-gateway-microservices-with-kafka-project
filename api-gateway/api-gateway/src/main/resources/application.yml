@@ -27,5 +27,5 @@ spring:
       show-details: always
     gateway:
       enabled: true
-  server:
-    port: 8083
+server:
+  port: 8083
