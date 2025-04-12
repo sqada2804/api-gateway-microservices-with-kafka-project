@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/users-service-api/users-service-api/pom.xml" />
         <option value="$PROJECT_DIR$/auth-service-api/auth-service-api/pom.xml" />
         <option value="$PROJECT_DIR$/common-library/pom.xml" />
+        <option value="$PROJECT_DIR$/eligilibility-microservice/eligilibility-microservice/pom.xml" />
       </list>
     </option>
   </component>
