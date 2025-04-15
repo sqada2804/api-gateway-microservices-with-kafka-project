@@ -3,6 +3,7 @@ package com.example.eligilibility_microservice.configuration;
 import com.example.eligilibility_microservice.common.GameCreatedEvent;
 import com.example.eligilibility_microservice.common.GameEligibleEvent;
 import com.example.eligilibility_microservice.processors.EligibilityGameProcessor;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Flux;

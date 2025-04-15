@@ -11,8 +11,8 @@ import reactor.core.publisher.Flux;
 @Component
 @Slf4j
 public class EligibilityGameProcessor {
-    private IGameEligibleService gameEligibleService;
 
+    private IGameEligibleService gameEligibleService;
 
     public EligibilityGameProcessor(GameEligibleService gameEligibleService) {
         this.gameEligibleService = gameEligibleService;

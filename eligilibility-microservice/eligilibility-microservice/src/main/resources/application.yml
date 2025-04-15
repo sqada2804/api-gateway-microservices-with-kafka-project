@@ -12,14 +12,16 @@ spring:
   cloud:
     function:
       definition: gameCreatedBinding
+      scan:
+        enabled: false
     stream:
       default-binder: kafka_default
       bindings:
-        gameBinding-in-0:
+        gameCreatedBinding-in-0:
           destination: event.game-created
           binder: kafka_default
           useNativeDecoding: true
-        gameBinding-out-0:
+        gameCreatedBinding-out-0:
           destination: event.game-eligible
           binder: kafka_default
           useNativeDecoding: true
