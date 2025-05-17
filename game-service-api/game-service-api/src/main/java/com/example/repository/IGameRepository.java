@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Optional;
 
 public interface IGameRepository extends JpaRepository<GameModel, Long> {
-    Optional<GameModel> findGameByUserIdAndGameId(@Param("userId")String userId, @RequestParam("gameId") Long gameId);
+    Optional<GameModel> findGameByUserIdAndGameId(@Param("userId")String userId, @Param("{gameId}") Long gameId);
 }

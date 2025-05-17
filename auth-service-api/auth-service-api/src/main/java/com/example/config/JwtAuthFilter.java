@@ -1,7 +1,7 @@
 package com.example.config;
 
 
-import com.example.repository.IAuthRepository;
+import com.example.repository.UserRepository;
 import com.example.services.ServiceInterface.IJwtService;
 import com.example.common_library.entity.UserModel;
 import jakarta.servlet.FilterChain;
@@ -20,11 +20,11 @@ import java.util.Optional;
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
     private final IJwtService jwtService;
-    private final IAuthRepository authRepository;
+    private final UserRepository userRepository;
 
-    public JwtAuthFilter(IJwtService jwtService, IAuthRepository authRepository) {
+    public JwtAuthFilter(IJwtService jwtService, UserRepository userRepository) {
         this.jwtService = jwtService;
-        this.authRepository = authRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 .filter(header -> !header.isBlank())
                 .map(header -> header.substring(7))
                 .map(jwtService::extractedUserId)
-                .flatMap(userId -> authRepository.findById(Long.valueOf(userId)))
+                .flatMap(userId -> userRepository.findById(Long.valueOf(userId)))
                 .ifPresent(userDetails -> {
                     request.setAttribute("X-User-Id", userDetails.getUserId());
                     processAuthentication(request, userDetails);

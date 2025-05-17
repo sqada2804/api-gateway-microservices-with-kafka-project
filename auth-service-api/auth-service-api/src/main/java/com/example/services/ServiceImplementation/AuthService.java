@@ -4,7 +4,7 @@ import com.example.common_library.entity.UserModel;
 import com.example.dtos.LoginDTO;
 import com.example.dtos.RegisterDTO;
 import com.example.dtos.TokenResponse;
-import com.example.repository.IAuthRepository;
+import com.example.repository.UserRepository;
 import com.example.services.ServiceInterface.IAuthService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,12 +15,12 @@ import java.util.Optional;
 @Service
 public class AuthService implements IAuthService {
 
-    private final IAuthRepository authRepository;
+    private final UserRepository authRepository;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthService(IAuthRepository authRepository, JwtService jwtService, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder) {
+    public AuthService(UserRepository authRepository, JwtService jwtService, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder) {
         this.authRepository = authRepository;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;

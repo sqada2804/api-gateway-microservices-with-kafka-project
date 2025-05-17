@@ -1,5 +1,7 @@
 package com.example.api_gateway.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
@@ -13,6 +15,8 @@ import reactor.core.publisher.Mono;
 @Component
 public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationFilter.class);
+
     private final RouterValidator validator;
     private final JwtUtils jwtUtils;
 
@@ -25,6 +29,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     @Override
     public GatewayFilter apply(Config config) {
         return ((exchange, chain) -> {
+
             var request = exchange.getRequest();
             var path = request.getURI().getPath();
 
@@ -49,7 +54,9 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                         .header("X-User-Id", jwtUtils.extractUserId(authHeader).toString())
                         .build();
             }
+            logger.warn("Procesando solicitud en gateway: "+ exchange.getRequest().getURI());
             return chain.filter(exchange.mutate().request(serverHttpRequest).build());
+
         });
     }
 

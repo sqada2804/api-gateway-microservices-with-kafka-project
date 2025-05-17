@@ -28,14 +28,14 @@ public class GameController implements IGameController {
     }
 
     @Override
-    public ResponseEntity<Void> updateGame(GameDTO gameDTO, String userId,  Long id) {
-        gameService.updateGame(gameDTO, userId, id);
+    public ResponseEntity<Void> updateGame(GameDTO gameDTO, String userId,  Long gameId) {
+        gameService.updateGame(gameDTO, userId, gameId);
         return ResponseEntity.noContent().build();
     }
 
     @Override
-    public ResponseEntity<Void> deleteGame(Long id, String userId) {
-        gameService.deleteGame(userId, id);
+    public ResponseEntity<Void> deleteGame(String userId, Long gameId) {
+        gameService.deleteGame(userId, gameId);
         return ResponseEntity.noContent().build();
     }
 }

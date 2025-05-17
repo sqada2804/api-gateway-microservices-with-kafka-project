@@ -8,8 +8,8 @@ import java.util.Date;
 
 @Service
 public class JwtUtils {
-    private final String secretKey = "ewubigfbweweiefwefWUHFWUFWHFIUWE17429372239jkebweiufwefuIHRWEFWEOF123wefwefwwefmlmrogIMOGEWNWO200423";
 
+    private final String secretKey = "ewubigfbweweiefwefWUHFWUFWHFIUWE17429372239jkebweiufwefuIHRWEFWEOF123wefwefwwefmlmrogIMOGEWNWO200423wefwegwewegwegwniu9wnv2382";
 
     public Claims getClaims(String token){
         return Jwts.parserBuilder()
@@ -23,7 +23,7 @@ public class JwtUtils {
         try{
             return getClaims(token).getExpiration().before(new Date());
         }catch (Exception e){
-            return false;
+            return true;
         }
     }
 

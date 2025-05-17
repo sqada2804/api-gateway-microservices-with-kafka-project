@@ -1,6 +1,6 @@
 package com.example.services.ServiceImplementation;
 
-import com.example.repository.IAuthRepository;
+import com.example.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsImpl implements UserDetailsService {
 
-    private final IAuthRepository authRepository;
+    private final UserRepository authRepository;
 
-    public UserDetailsImpl(IAuthRepository authRepository) {
+    public UserDetailsImpl(UserRepository authRepository) {
         this.authRepository = authRepository;
     }
 

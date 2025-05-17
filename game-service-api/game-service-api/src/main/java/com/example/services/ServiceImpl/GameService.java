@@ -3,9 +3,10 @@ package com.example.services.ServiceImpl;
 import com.example.common.constants.TopicConstants;
 import com.example.common.dtos.GameDTO;
 import com.example.common.entities.GameModel;
+import com.example.common.exceptions.NotFoundException;
+import com.example.common.exceptions.UnauthorizedException;
 import com.example.repository.IGameRepository;
 import com.example.services.ServiceInterface.IGameService;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class GameService implements IGameService {
                 .map(game -> mapToEntity(game, userId))
                 .map(gameRepository::save)
                 .map(this::sendGameEvent)
-                .orElseThrow(() -> new RuntimeException("Error creating Game"));
+                .orElseThrow(() -> new UnauthorizedException("Unauthorized for create game"));
     }
 
     private GameModel sendGameEvent(GameModel gameModel) {
@@ -41,23 +42,23 @@ public class GameService implements IGameService {
     @Override
     public GameModel getGame(String userId, Long gameId) {
         return Optional.of(userId)
-                .flatMap(game -> gameRepository.findGameByUserIdAndGameId(userId, gameId))
-                .orElseThrow(() -> new RuntimeException("Error getting Game"));
+                .flatMap(userId1 -> gameRepository.findGameByUserIdAndGameId(userId1, gameId))
+                .orElseThrow(() -> new NotFoundException("Game was not found for show"));
     }
 
     @Override
-    public void updateGame(GameDTO gameDTO, String userId, Long id) {
-        gameRepository.findGameByUserIdAndGameId(userId, id)
+    public void updateGame(GameDTO gameDTO, String userId, Long gameId) {
+        gameRepository.findGameByUserIdAndGameId(userId, gameId)
                 .map(GameExists -> updateFieldsGame(GameExists, gameDTO))
                 .map(gameRepository::save)
-                .orElseThrow(() -> new RuntimeException("Error updating Game"));
+                .orElseThrow(() -> new NotFoundException("Game was not found for update"));
     }
 
     @Override
-    public void deleteGame(String userId, Long id) {
-        gameRepository.findGameByUserIdAndGameId(userId, id)
+    public void deleteGame(String userId, Long gameId) {
+        gameRepository.findGameByUserIdAndGameId(userId, gameId)
                 .ifPresentOrElse(gameRepository::delete, () -> {
-                    throw new RuntimeException("Error deleting Game");
+                    throw new NotFoundException("Game was not found for delete");
                 });
     }
 
